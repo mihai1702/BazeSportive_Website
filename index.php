@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="assets/style/style.css">
 </head>
 <body>
-    <h1>Title</h1>
-    <script src="assets/js.script.js"></script>
+    <?php include "assets/components/header.php";?>
+    <script src="assets/js/script.js"></script>
 </body>
 </html>
