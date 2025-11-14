@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="assets/style/style.css">
 </head>
 <body>
+  <?php include 'assets/components/loading-screen.php'; ?>
   <?php include 'assets/components/header.php' ?>
 <div class="card">
 <h2>Logare</h2>

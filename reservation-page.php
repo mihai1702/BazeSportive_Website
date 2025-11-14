@@ -12,6 +12,7 @@
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css" rel="stylesheet">
 </head>
 <body>
+    <?php include 'assets/components/loading-screen.php'; ?>
     <?php include 'assets/components/header.php' ?>
     <div id="calendar"></div>
 

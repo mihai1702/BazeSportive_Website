@@ -1,5 +1,13 @@
-<?php
+<?php 
 session_start();
+if (!empty($_SESSION['success'])): ?>
+    <div class="success-box">
+      <p>Contul a fost creat cu succes! </p>
+      <p>Asteapta confirmarea administratorului inainte de logare</p>
+    </div>
+<?php 
+unset($_SESSION['success']);
+endif; 
 ?>
 <!DOCTYPE html>
 <html lang="ro">
@@ -46,7 +54,7 @@ session_start();
             align-items: center;
             box-shadow: var(--shadow);
         } */
-        header h1 { margin: 0; font-size: 26px; font-weight: 600; }
+        /* header h1 { margin: 0; font-size: 26px; font-weight: 600; } */
 
         .theme-toggle {
             background: var(--secondary);
@@ -186,11 +194,7 @@ session_start();
     </style>
 </head>
 <body>
-<!-- LOADING -->
-<div id="loading">
-    <div class="spinner"></div>
-</div>
-
+<?php include 'assets/components/loading-screen.php'; ?>
 <?php include "assets/components/header.php";?>
 
 <div class="container fade-in">
@@ -249,13 +253,6 @@ session_start();
     ];
 
     let selectedBase = null;
-
-    /* LOADING */
-    window.onload = () => {
-        setTimeout(() => {
-            document.getElementById("loading").style.display = "none";
-        }, 900);
-    };
 
     /* DARK MODE */
     function toggleTheme() {

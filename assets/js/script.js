@@ -130,3 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   calendar.render();
 });
+
+  window.onload = () => {
+      document.getElementById("loading").style.display = "none";
+  };
