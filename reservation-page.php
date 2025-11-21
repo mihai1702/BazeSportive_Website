@@ -14,8 +14,17 @@
 <body>
     <?php include 'assets/components/loading-screen.php'; ?>
     <?php include 'assets/components/header.php' ?>
-    <div id="calendar"></div>
 
+    <div class="reservation-page-body">
+        <div>
+            <h1>Program fotbal universitate</h1>
+            <p>Selecteaza data dorita pe calendar pentru a face o rezervare</p>
+        </div>
+    
+        <div id="calendar"></div>
+
+    </div>
+    <?php include 'assets/components/footer.php';?>
     <script src="assets/js/script.js"></script>
 </body>
 </html>

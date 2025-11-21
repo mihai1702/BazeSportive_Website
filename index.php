@@ -15,6 +15,7 @@ endif;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Baze Sportive UMFST – Rezervări</title>
+    <link rel="icon" href="assets/icons/logo-icon.png">
     <link rel="stylesheet" href="assets/style/style.css">
 
     <style>
@@ -28,34 +29,12 @@ endif;
             --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
-        /* DARK MODE */
-        body.dark {
-            --bg: #0f1116;
-            --card-bg: #1a1d24;
-            --text: #e6e6e6;
-            --shadow: 0 4px 12px rgba(255, 255, 255, 0.08);
-        }
-
         body {
-            font-family: "Inter", sans-serif;
             margin: 0;
             background: var(--bg);
             color: var(--text);
             transition: background 0.3s, color 0.3s;
         }
-
-        /* HEADER */
-        /* header {
-            background: var(--primary);
-            color: white;
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: var(--shadow);
-        } */
-        /* header h1 { margin: 0; font-size: 26px; font-weight: 600; } */
-
         .theme-toggle {
             background: var(--secondary);
             padding: 10px 14px;
@@ -184,13 +163,6 @@ endif;
             cursor:pointer;
         }
 
-        footer {
-            margin-top: 40px;
-            text-align: center;
-            padding: 20px;
-            background: var(--primary);
-            color: white;
-        }
     </style>
 </head>
 <body>
@@ -239,9 +211,7 @@ endif;
     </div>
 </div>
 
-<footer>
-    © 2025 UMFST „George Emil Palade” – Rezervări
-</footer>
+<?php include 'assets/components/footer.php';?>
 
 <script>
     // Fake data
@@ -249,7 +219,9 @@ endif;
         { id: 1, nume: "Sala Sporturilor", totalLocuri: 30, ocupate: 12 },
         { id: 2, nume: "Teren Fotbal Sintetic", totalLocuri: 20, ocupate: 8 },
         { id: 3, nume: "Fitness Hall", totalLocuri: 15, ocupate: 4 },
-        { id: 4, nume: "Teren Baschet Exterior", totalLocuri: 12, ocupate: 5 }
+        { id: 4, nume: "Teren Baschet Exterior", totalLocuri: 12, ocupate: 5 },
+        { id: 5, nume: "Baza inot", totalLocuri: 13, ocupate: 5 }
+        
     ];
 
     let selectedBase = null;

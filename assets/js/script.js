@@ -13,8 +13,8 @@ document.addEventListener('DOMContentLoaded', function() {
     hiddenDays: [0, 2, 3, 4, 6],
     headerToolbar: {
       left: 'prev,next',
-      center: 'title',
-      right: 'timeGridWeek,timeGridDay'
+      center: '',
+      right: 'title'
     },
     businessHours: [
       {
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
     selectable: true,
     selectAllow: function(selectInfo) {
       const start = selectInfo.start;
-      const day = start.getDay(); // 1 = luni, 5 = vineri
+      const day = start.getDay();
       const hour = start.getHours();
       const minute = start.getMinutes();
 
@@ -58,28 +58,30 @@ document.addEventListener('DOMContentLoaded', function() {
         const startMinutes = hour * 60 + minute;
         return startMinutes >= 19 * 60 && startMinutes < 21 * 60;
       }
-
-      // Orice altă zi: nu permite selectarea
       return false;
     },
 
-    select: function(info) {
-      const start = new Date(info.start);
-      const day = start.getDay();
-      let maxEndTime;
+  select: function(info) {
+  const start = new Date(info.start);
+  const date = start.toISOString().split("T")[0];
+  const startTime = start.toTimeString().split(" ")[0];
 
-      if (day === 1) {
-        maxEndTime = new Date(start);
-        maxEndTime.setHours(21, 30, 0);
-      } else if (day === 5) {
-        maxEndTime = new Date(start);
-        maxEndTime.setHours(21, 0, 0);
-      } else {
-        alert("Programările sunt deschise doar luni și vineri în intervalul orar specificat.");
+  fetch(`/bazesportive_website/check-availability.php?date=${date}&start=${startTime}`)
+    .then(res => res.json())
+    .then(data => {
+
+      if (data.error) {
+        alert(data.error);
         return;
       }
 
-      const diffMinutes = Math.floor((maxEndTime - start) / 60000);
+      const diffMinutes = data.max_minutes; // AICI ESTE FIXUL !!!
+
+      // dacă nu ai minim 30 minute libere
+      if (diffMinutes < 30) {
+        alert("Nu există suficient timp liber pentru o rezervare în acest interval.");
+        return;
+      }
 
       let durationoptions = `<option value="30">30 minute</option>`;
       if (diffMinutes >= 60) durationoptions += `<option value="60">O oră</option>`;
@@ -93,39 +95,53 @@ document.addEventListener('DOMContentLoaded', function() {
           <div class="form-content">
             <h3>Fă o rezervare</h3>
             <form id="reservationForm">
-              <label>Data și ora începutului:</label>
-              <input type="datetime-local" name="start_time" value="${startISO}" readonly><br>
-              
-              <label>Durata:</label>
-              <select name="duration">${durationoptions}</select><br>
-              
-              <label>Număr de persoane:</label>
-              <input type="number" name="nr_participants" min="1" max="10" value="1" required><br>
-              
-              <button type="submit">Confirmă rezervarea</button>
-              <button type="button" id="close-form">Anulează</button>
+              <div>
+                <label>Data și ora începutului:</label>
+                <input type="datetime-local" name="start_time" value="${startISO}" readonly><br>
+              </div>
+
+              <div>
+                <label>Durata:</label>
+                <select name="duration">${durationoptions}</select><br>
+              </div>
+
+              <div>
+                <label>Număr de persoane:</label>
+                <input type="number" name="nr_participants" min="1" max="10" value="1" required><br>
+              </div>
+
+              <div>
+                <button type="submit">Confirmă rezervarea</button>
+                <button type="button" id="close-form">Anulează</button>
+              </div>
             </form>
           </div>
         </div>
       `;
 
       document.body.insertAdjacentHTML('beforeend', formHtml);
+
       document.getElementById('close-form').onclick = () => {
         document.getElementById('reservation-form').remove();
       };
-      document.getElementById('reservationForm').onsubmit = async (e)=> {
+
+      document.getElementById('reservationForm').onsubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
         const response = await fetch('/bazesportive_website/make-reservation.php', {
           method: 'POST',
           body: formData
-         });
+        });
         const result = await response.json();
         alert(result.message);
         document.getElementById('reservation-form').remove();
         calendar.refetchEvents();
-      }
-    }
+      };
+
+    });
+
+  
+}
   });
 
   calendar.render();
@@ -134,3 +150,38 @@ document.addEventListener('DOMContentLoaded', function() {
   window.onload = () => {
       document.getElementById("loading").style.display = "none";
   };
+
+
+document.querySelectorAll('.btn-cancel-res').forEach(btn =>{
+  btn.addEventListener('click', () =>{
+    const id=btn.dataset.id;
+
+    if(!confirm("Sigur vrei sa anulezi programarea?")) return;
+
+    fetch('delete-reservation.php', {
+      method: 'POST',
+      headers: {
+        "Content-type": "application/x-www-form-urlencoded"
+      },
+      body: "reservation_id=" + id
+    })
+    .then(res=> res.json())
+    .then(data =>{
+      alert(data.message);
+
+      if(data.status === "success"){
+        document.querySelector(`tr[data-row-id="${id}"]`)?.remove();
+      }
+    })
+  })
+})
+
+document.addEventListener("DOMContentLoaded", () => {
+    const menuToggle = document.getElementById("menuToggle");
+    const navbar = document.querySelector(".navbar");
+
+    menuToggle.addEventListener("click", (e) => {
+        e.preventDefault();
+        navbar.classList.toggle("show");
+    });
+});

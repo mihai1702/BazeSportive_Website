@@ -1,3 +1,10 @@
+<?php
+  if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    };
+  $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+
+?>
 <!doctype html>
 <html lang="ro">
 <head>
@@ -13,19 +20,8 @@
 <div class="card">
 <h2>Logare</h2>
 
-<?php 
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }; 
-    if (!empty($_SESSION['errors'])): ?>
-  <div class="error-box">
-    <p><?= $_SESSION['errors']?></p>
-  </div>
-  <?php unset($_SESSION['errors']); ?>
-    <?php endif; ?>
-
-
 <form method="post" action="authentification/login.php">
+  <input type="hidden" name="csrf" value="<?= $_SESSION['csrf_token']?>">
   <div class="input-group">
     <label>Email</label>
     <input id="email" name="email" type="email" required value="<?=htmlspecialchars($_POST['email']??'')?>">
@@ -37,14 +33,24 @@
       <button type="button" class="pw-toggle" data-target="password">Arată parola</button>
     </div>
   </div>
+  <?php  
+    if (!empty($_SESSION['errors'])): ?>
+  <div class="error-box">
+    <p><?= $_SESSION['errors']?></p>
+  </div>
+  <?php unset($_SESSION['errors']); ?>
+<?php endif; ?>
+
   <button type="submit" class="btn-primary">Logare</button>
   <a href="register-page.php"><button type="button" class="btn-secondary">Creează cont</button></a>
   <div class="small">După logare veți fi direcționat în zona de programări (dacă contul este aprobat).</div>
 </form>
 
 
+</div>
+<?php include 'assets/components/footer.php';?>
 
 <script src="assets/js/auth-script.js"></script>
-</div>
+<script src="assets/js/script.js"></script>
 </body>
 </html>

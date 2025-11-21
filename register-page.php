@@ -49,8 +49,10 @@
   <button type="submit" class="btn-primary">Creează cont</button>
   <a href="login-page.php"><button type="button" class="btn-secondary">Am deja cont / Logare</button></a>
 </form>
+</div>
+<?php include 'assets/components/footer.php';?>
 
 <script src="assets/js/auth-script.js"></script>
-</div>
+<script src="assets/js/script.js"></script>
 </body>
 </html>
