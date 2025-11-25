@@ -619,6 +619,15 @@ footer a:hover{
     .hero-text{
         width: 100%;
     }
+    .participant-item{
+        display: flex;
+        align-items: center;
+        padding-top: 5px;
+    }
+    .participant-item input{
+    height: 20px;
+    width: 20px;
+}
 }
 
 /* ANIMATIONS */

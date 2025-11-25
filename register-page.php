@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Creare cont - UMFST Booking</title>
+  <link rel="icon" href="/bazesportive_website/assets/icons/logo-icon.png">
   <link rel="stylesheet" href="assets/style/auth-style.css">
   <link rel="stylesheet" href="assets/style/style.css">
   </head>
