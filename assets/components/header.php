@@ -7,8 +7,8 @@
 <header>
     <div class="left-side">
         <a href="/BazeSportive_website/index.php">
-            <img src="assets/icons/logo-umfst-alb.png" alt=".">
-            <img src="assets/icons/logo_lstgm.png" alt=".">
+            <img src="/BazeSportive_website/assets/icons/logo-umfst-alb.png" alt=".">
+            <img src="/BazeSportive_website/assets/icons/logo_lstgm.png" alt=".">
         </a>
     </div>
     <h1>BAZA SPORTIVA</h1>

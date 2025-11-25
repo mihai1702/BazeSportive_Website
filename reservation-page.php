@@ -14,7 +14,7 @@
 <body>
     <?php include 'assets/components/loading-screen.php'; ?>
     <?php include 'assets/components/header.php' ?>
-
+    <main>
     <div class="reservation-page-body">
         <div>
             <h1>Program fotbal universitate</h1>
@@ -24,6 +24,7 @@
         <div id="calendar"></div>
 
     </div>
+    </main>
     <?php include 'assets/components/footer.php';?>
     <script src="assets/js/script.js"></script>
 </body>

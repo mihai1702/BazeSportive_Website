@@ -18,6 +18,9 @@
   <?php include 'assets/components/loading-screen.php'; ?>
   <?php include 'assets/components/header.php' ?>
 <div class="card">
+  <img src="/bazesportive_website/assets/images/register-page-image-desktop.jpg" alt=".">
+<div class="auth-content">
+
 <h2>Logare</h2>
 
 <form method="post" action="authentification/login.php">
@@ -47,6 +50,7 @@
 </form>
 
 
+</div>
 </div>
 <?php include 'assets/components/footer.php';?>
 
