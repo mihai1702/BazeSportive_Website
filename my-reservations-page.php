@@ -24,6 +24,7 @@
         include 'assets/components/loading-screen.php';
         include 'assets/components/header.php';
     ?>
+    <main>
     <table class="table-section">
         <thead>
             <tr>
@@ -49,6 +50,18 @@
         </tbody>
         
     </table>
+    <div id="confirm-popup" class="confirm-popup hidden">
+        <div class="confirm-box">
+            <p>Sigur vrei să anulezi rezervarea?</p>
+            <div class="confirm-buttons">
+                <button id="confirm-yes">Da</button>
+                <button id="confirm-no">Nu</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast hidden"></div>
+    </main>
 <?php include 'assets/components/footer.php';?>
 <script src="assets/js/script.js"></script>
 </body>

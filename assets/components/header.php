@@ -5,7 +5,12 @@
 ?>
 
 <header>
-    <img src="https://umfst.ro/wp-content/uploads/2023/01/new-logo-UMFST-bigger-mark.svg" alt=".">
+    <div class="left-side">
+        <a href="/BazeSportive_website/index.php">
+            <img src="assets/icons/logo-umfst-alb.png" alt=".">
+            <img src="assets/icons/logo_lstgm.png" alt=".">
+        </a>
+    </div>
     <h1>BAZA SPORTIVA</h1>
 
     <a class="menu-toggle" id="menuToggle" href=""><img class="menu-toggle" src="assets/icons/navbar-icon.svg" alt="navbar-icon"></a>

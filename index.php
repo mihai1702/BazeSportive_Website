@@ -15,9 +15,9 @@ endif;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Baze Sportive UMFST – Rezervări</title>
+
     <link rel="icon" href="assets/icons/logo-icon.png">
     <link rel="stylesheet" href="assets/style/style.css">
-
     <style>
         :root {
             --primary: #003366;
